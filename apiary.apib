@@ -30,11 +30,35 @@ Learning Object resource
     + repo_id: 1 (required, String) - ID of the Repository
     + learningobject_id: 1 (required, String) - ID of the leanring object
 
+### View a Learning resource [GET]
+
++ Response 200 (application/json)
+
+        {
+            "tbd": "tbd",
+        }
+
 ## Learningobjects Collection [/repos/{repo_id}/learningobjects{?learning_resource_type%5b%5d,course_id,xa_nr_views}]
 
 + Parameters
     + repo_id: 1 (required, String) - ID of the Repository
     + learning_resource_type: 1 (String) - types of learning resources
+
+### List All Vocabularies [GET]
+
++ Response 200 (application/json)
+
+    + Headers
+
+            Link: </repos/1/learningobjects?page=2>; rel="next"
+
+    + Body
+
+            [
+                {
+                    "tbd": "tbd",
+                }
+            ]
 
 ## Group Vocabularies
 
