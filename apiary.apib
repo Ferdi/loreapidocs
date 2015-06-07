@@ -38,7 +38,7 @@ Learning Object resource
             "tbd": "tbd",
         }
 
-## Learningobjects Collection [/repos/{repo_id}/learningobjects{?learning_resource_type%5b%5d,course_id,xa_nr_views}]
+## Learningobjects Collection [/repos/{repo_id}/learningobjects{?learning_resource_type%5b%5d,course_id,xa_nr_views,page}]
 
 + Parameters
     + repo_id: 1 (required, String) - ID of the Repository
@@ -50,7 +50,7 @@ Learning Object resource
 
     + Headers
 
-            Link: </repos/1/learningobjects?page=2>; rel="next"
+            Link: </repos/1/learningobjects?learning_resource_type[]=3&learning_resource_type[]=4&page=2>; rel="next"
 
     + Body
 
