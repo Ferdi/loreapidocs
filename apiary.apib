@@ -1,149 +1,86 @@
 FORMAT: 1A
-HOST: http://polls.apiblueprint.org/
+HOST: http://lore.mit.edu/
 
-# Lore
+# LORE
 
-Polls is a simple API allowing consumers to view polls and vote in them.
+Simple API on top of MIT LORE application
 
-# Polls API Root [/]
+# LORE API Root [/]
 
-This resource does not have any attributes. Instead it offers the initial
-API affordances in the form of the links in the JSON body.
-
-It is recommend to follow the “url” link values,
-[Link](https://tools.ietf.org/html/rfc5988) or Location headers where
-applicable to retrieve resources. Instead of constructing your own URLs,
-to keep your client decoupled from implementation details.
 
 ## Retrieve the Entry Point [GET]
 
 + Response 200 (application/json)
 
         {
-            "questions_url": "/questions"
+            "taxonomy_url": "/repos/{repo_id}/vocabularies",
+            "learningobjects_url": "/repos/{repo_id}/learningobjects",
         }
 
-## Group Question
+## Group Vocabularies
 
-Resources related to questions in the API.
+Resources related to Vocabularies in the API.
 
-## Question [/questions/{question_id}]
+## Vocabulary [/repos/{repo_id}/vocabs/{vocab_id}]
 
-A Question object has the following attributes:
-
-+ question
-+ published_at - An ISO8601 date when the question was published.
-+ url
-+ choices - An array of Choice objects.
 
 + Parameters
-    + question_id: 1 (required, number) - ID of the Question in form of an integer
+    + repo_id: 1 (required, String) - ID of the Repository
+    + vocab_id: 1 (required, String) - ID of the Vocabulary
 
-### View a Questions Detail [GET]
+### View a Vocabulary [GET]
 
 + Response 200 (application/json)
 
         {
-            "question": "Favourite programming language?",
-            "published_at": "2014-11-11T08:40:51.620Z",
-            "url": "/questions/1",
-            "choices": [
-                {
-                    "choice": "Swift",
-                    "url": "/questions/1/choices/1",
-                    "votes": 2048
-                }, {
-                    "choice": "Python",
-                    "url": "/questions/1/choices/2",
-                    "votes": 1024
-                }, {
-                    "choice": "Objective-C",
-                    "url": "/questions/1/choices/3",
-                    "votes": 512
-                }, {
-                    "choice": "Ruby",
-                    "url": "/questions/1/choices/4",
-                    "votes": 256
-                }
-            ]
+            "tbd": "tbd",
         }
 
-## Choice [/questions/{question_id}/choices/{choice_id}]
+## Term [/repos/{repo_id}/vocabs/{vocabs_id}/term/{term_id}]
 
 + Parameters
-    + question_id: 1 (required, number) - ID of the Question in form of an integer
-    + choice_id: 1 (required, number) - ID of the Choice in form of an integer
+    + repo_id: 1 (required, String) - ID of the Repository
+    + vocab_id: 1 (required, String) - ID of the Vocabulary
+    + term_id: 1 (required, String) - ID of the Taxonomy term
 
-### Vote on a Choice [POST]
 
-This action allows you to vote on a question's choice.
 
-+ Response 201
-
-    + Headers
-
-            Location: /questions/1
-
-## Questions Collection [/questions{?page}]
+## Vocabularies Collection [/repos/{repo_id}/vocabs/{?page}]
 
 + Parameters
-    + page: 1 (optional, number) - The page of questions to return
+    + repo_id: 1 (required, String) - ID of the Repository
+    + page: 1 (optional, number) - The page of vocabularies to return
 
-### List All Questions [GET]
+### List All Vocabularies [GET]
 
 + Response 200 (application/json)
 
     + Headers
 
-            Link: </questions?page=2>; rel="next"
+            Link: </repos/1/vocabs?page=2>; rel="next"
 
     + Body
 
             [
                 {
-                    "question": "Favourite programming language?",
-                    "published_at": "2014-11-11T08:40:51.620Z",
-                    "url": "/questions/1",
-                    "choices": [
-                        {
-                            "choice": "Swift",
-                            "url": "/questions/1/choices/1",
-                            "votes": 2048
-                        }, {
-                            "choice": "Python",
-                            "url": "/questions/1/choices/2",
-                            "votes": 1024
-                        }, {
-                            "choice": "Objective-C",
-                            "url": "/questions/1/choices/3",
-                            "votes": 512
-                        }, {
-                            "choice": "Ruby",
-                            "url": "/questions/1/choices/4",
-                            "votes": 256
-                        }
-                    ]
+                    "tbd": "tbd",
                 }
             ]
 
-### Create a New Question [POST]
+### Create a New Vocabulary [POST]
 
-You may create your own question using this action. It takes a JSON
-object containing a question and a collection of answers in the
-form of choices.
-
-+ question (string) - The question
-+ choices (array[string]) - A collection of choices.
+Create your own vocabulary by providing its JSON representation
 
 + Request (application/json)
 
         {
-            "question": "Favourite programming language?",
-            "choices": [
-                "Swift",
-                "Python",
-                "Objective-C",
-                "Ruby"
+            "name": "learning objectives",
+            "description": "learning objectives description",
+            "vocabulary_type": "m"
+            "weight": 1
+            "learning_resource_types": [
+                "Problem",
+                "Vertical"
             ]
         }
 
@@ -151,31 +88,17 @@ form of choices.
 
     + Headers
 
-            Location: /questions/2
+            Location: /repos/1/vocabularies/2
 
     + Body
 
             {
-                "question": "Favourite programming language?",
-                "published_at": "2014-11-11T08:40:51.620Z",
-                "url": "/questions/2",
-                "choices": [
-                    {
-                        "choice": "Swift",
-                        "url": "/questions/2/choices/1",
-                        "votes": 0
-                    }, {
-                        "choice": "Python",
-                        "url": "/questions/2/choices/2",
-                        "votes": 0
-                    }, {
-                        "choice": "Objective-C",
-                        "url": "/questions/2/choices/3",
-                        "votes": 0
-                    }, {
-                        "choice": "Ruby",
-                        "url": "/questions/2/choices/4",
-                        "votes": 0
-                    }
+                "name": "learning objectives",
+                "description": "learning objectives description",
+                "vocabulary_type": "m"
+                "weight": 1
+                "learning_resource_types": [
+                    "Problem",
+                    "Vertical"
                 ]
             }
