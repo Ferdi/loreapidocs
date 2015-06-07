@@ -7,17 +7,32 @@ Simple API on top of MIT LORE application
 
 # LORE API Root [/]
 
++ Parameters
+    + repo_id: 1 (required, String) - ID of the Repository
 
 ## Retrieve the Entry Point [GET]
 
 + Response 200 (application/json)
 
         {
-            "taxonomy_url": "/repos/{repo_id}/vocabularies",
-            "learningobjects_url": "/repos/{repo_id}/learningobjects",
+            "learningobjects_url": "/repos/1/learningobjects",
+            "taxonomy_url": "/repos/1/vocabularies",
+            "members_url": "/repos/1/members",
         }
 
 ## Group Learning Objects
+
+## LearningObjects [/repos/{repo_id}/learningobjects/{learningobject_id}]
+
++ Parameters
+    + repo_id: 1 (required, String) - ID of the Repository
+    + learningobject_id: 1 (required, String) - ID of the leanring object
+
+## LearningObjects Collection [/repos/{repo_id}/learningobjects{?learning_resource_type%5b%5d*,course_id,xa_nr_views}]
+
++ Parameters
+    + repo_id: 1 (required, String) - ID of the Repository
+    + learning_resource_type: 1 (String) - types of learning resources
 
 ## Group Vocabularies
 
