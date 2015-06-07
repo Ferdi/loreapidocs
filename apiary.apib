@@ -9,20 +9,79 @@ Simple API on top of MIT LORE application
 
 # Pagination
 
-# LORE API Root [/{repo_id}]
-
-+ Parameters
-    + repo_id: 1 (required, String) - ID of the Repository
+# LORE API Root [/]
 
 ## Retrieve the Entry Point [GET]
 
 + Response 200 (application/json)
 
         {
-            "learningobjects_url": "/repos/1/learningobjects",
-            "taxonomy_url": "/repos/1/vocabularies",
-            "members_url": "/repos/1/members",
+            "repositories_url": "/repos"
         }
+
+## Group Repositories
+
+Repository resource
+
+## Repositories [/repos/{repo_id}]
+
++ Parameters
+    + repo_id: 1 (required, String) - ID of the Repository
+
+### View a repository [GET]
+
++ Response 200 (application/json)
+
+        {
+            "tbd": "tbd",
+        }
+
+### Create a New Repository [POST]
+
+Create a repository by providing its JSON representation
+
++ Request (application/json)
+
+        {
+            "name": "Physics 1",
+            "description": "All intro-to-physics courses"
+        }
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /repos/123
+
+    + Body
+
+            {
+                "name": "Physics 1",
+                "description": "All intro-to-physics courses"
+            }
+
+
+## Repository Collection [/repos/{repo_id}{?page}]
+
++ Parameters
+    + repo_id: 1 (required, String) - ID of the Repository
+    + page: 1 (optional, number) - The page of vocabularies to return
+
+### List All Repositories [GET]
+
++ Response 200 (application/json)
+
+    + Headers
+
+            Link: </repos/1/repos?page=2>; rel="next"
+
+    + Body
+
+            [
+                {
+                    "tbd": "tbd",
+                }
+            ]
 
 ## Group Learningobjects
 
@@ -47,6 +106,7 @@ Learning Object resource
 + Parameters
     + repo_id: 1 (required, String) - ID of the Repository
     + learning_resource_type: 1 (String) - types of learning resources
+    + course_id: (String)
 
 ### List learning resources [GET]
 
