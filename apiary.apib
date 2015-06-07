@@ -294,3 +294,43 @@ Create your own vocabulary by providing its JSON representation
             ]
 
 ## Group Members
+
+Represents users / members of the repository
+
+## Member [/repos/{repo_id}/members/{member_id}]
+
++ Parameters
+    + repo_id: 1 (required, String) - ID of the Repository
+    + member_id: 1 (required, String) - ID of the user in the system
+
+### View a Member [GET]
+
++ Response 200 (application/json)
+
+        {
+            "tbd": "tbd",
+        }
+
+## Members Collection [/repos/{repo_id}/members{?page,role}]
+
++ Parameters
+    + repo_id: 1 (required, String) - ID of the Repository
+    + page: 1 (optional, number) - The page of vocabularies to return
+    + role: IDs of the roles this member belongs to
+
+
+### List All Members [GET]
+
++ Response 200 (application/json)
+
+    + Headers
+
+            Link: </repos/1/members?page=2&role=3>; rel="next"
+
+    + Body
+
+            [
+                {
+                    "tbd": "tbd",
+                }
+            ]
