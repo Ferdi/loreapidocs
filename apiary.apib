@@ -13,14 +13,14 @@ URL Structure is `https://{domain}/api/v1/{resource}/{resourceId}`
 |`{domain}`    | The domain of the LORE service. `private-b0103d-lore.apiary-mock.com/` is the Apiary mock server. |
 |`/api/v1/`    | The service endpoint includes the current version (v1) |
 |`{resource}`  | The resource endpoint for a specific set of objects in the system. Supported endpoints include repositories, vocabularies, learningresources, members|
-|`{resourceId}`  |The `resourceId` sets the ID for a specific object to reference |
+|`{resource_idd}`  |The `resource_id` sets the ID for a specific object to reference |
 
 *Example: `http://lore.mit.edu/api/v1/repos` will return a json representation of all repositories.*
 
 *Example: `http://lore.mit.edu/api/v1/repos/123` will return a json representation of the repository with id=123.*
 
 # Operations
-We use RESTful verbs for all operations and methods.
+LORE API uses the following HTTP verbs
 
 | Verb   | Description |
 | ---    | --- |
@@ -46,7 +46,11 @@ The API responds with one of the following status codes.
 
 # Authentication
 
+tbd.
+
 # Pagination
+
+tbd.
 
 # LORE API Root [/]
 
@@ -57,6 +61,8 @@ The API responds with one of the following status codes.
         {
             "repositories_url": "/repos"
         }
+
+
 
 ## Group Repositories
 
@@ -188,15 +194,6 @@ Resources related to Vocabularies in the API.
             "tbd": "tbd",
         }
 
-## Term [/repos/{repo_id}/vocabs/{vocab_id}/term/{term_id}]
-
-+ Parameters
-    + repo_id: 1 (required, String) - ID of the Repository
-    + vocab_id: 1 (required, String) - ID of the Vocabulary
-    + term_id: 1 (required, String) - ID of the Taxonomy term
-
-
-
 ## Vocabularies Collection [/repos/{repo_id}/vocabs/{?page}]
 
 + Parameters
@@ -255,5 +252,36 @@ Create your own vocabulary by providing its JSON representation
                 ]
             }
 
+
+## Term [/repos/{repo_id}/vocabs/{vocab_id}/term/{term_id}]
+
++ Parameters
+    + repo_id: 1 (required, String) - ID of the Repository
+    + vocab_id: 1 (required, String) - ID of the Vocabulary
+    + term_id: 1 (required, String) - ID of the Taxonomy term
+
+## Terms Collection [/repos/{repo_id}/vocabs/{vocab_id}/terms{?page,learning_resource_type%5b%5d}]
+
++ Parameters
+    + repo_id: 1 (required, String) - ID of the Repository
+    + vocab_id: 1 (required, String) - ID of the Vocabulary
+    + page: 1 (optional, number) - The page of vocabularies to return
+    + learning_resource_type: 1 (String) - types of learning resources
+
+### List All Terms [GET]
+
++ Response 200 (application/json)
+
+    + Headers
+
+            Link: </repos/1/vocabs/234/terms?page=2>; rel="next"
+
+    + Body
+
+            [
+                {
+                    "tbd": "tbd",
+                }
+            ]
 
 ## Group Members
